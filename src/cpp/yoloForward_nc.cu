@@ -1,10 +1,3 @@
-/*
- * SPDX-FileCopyrightText: Copyright (c) 2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
- *
- * Created by Marcos Luciano
- * https://www.github.com/marcoslucianops
- */
-
 #include <stdint.h>
 #include <iostream>
 
