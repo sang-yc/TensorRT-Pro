@@ -94,7 +94,7 @@ void preprocess_resize_gpu(         //->根据比例进行缩放 (GPU)
 
     //->分配device上的src的内存
     CUDA_CHECK(cudaMalloc(&d_src, src_size));
-
+    
     //->将数据拷贝到device上
     CUDA_CHECK(cudaMemcpy(d_src, h_src.data, src_size, cudaMemcpyHostToDevice));
 

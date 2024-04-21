@@ -9,9 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)                 # 表明如果找不到指�
 set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc)   # 设置NVCC编译器
 
 # TensorRT
-set(TENSORRT_ROOT /home/sang/packages/TensorRT-8.5.1.7)
-include_directories(${TENSORRT_ROOT}/include/)
-link_directories(${TENSORRT_ROOT}/lib)
+include_directories(/usr/include/aarch64-linux-gnu)
+link_directories(/usr/lib/aarch64-linux-gnu)
 
 # CUDA
 set(CUDA_ROOT /usr/local/cuda)
@@ -29,11 +28,11 @@ link_libraries(${OpenCV_LIBS})
 option(ENABLE_DEBUG "Enable Debug" OFF)
 if (ENABLE_DEBUG)
     message("++ Compile and debug versions of the program.")
-    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O0 -G -g -arch=sm_86")  # 调试版
+    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O0 -G -g -arch=sm_72")  # 调试版
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 else()
     message("++ Compile and release versions of the program.")
-    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O3 -arch=sm_86")         # 发布版
+    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -O3 -arch=sm_72")         # 发布版
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 endif()
 
@@ -50,5 +49,5 @@ target_link_libraries(trt-infer PRIVATE -lstdc++fs) # 编译experimental/filesys
 target_link_libraries(trt-infer PRIVATE nvinfer nvonnxparser nvparsers nvinfer_plugin)  # 链接TensorRT动态库
 target_link_libraries(trt-infer PRIVATE cudart)                                         # 链接CUDA动态库
 
-set_target_properties(trt-infer PROPERTIES CUDA_ARCHITECTURES "86") # 假设你的目标架构是Compute Capability 8.6
+set_target_properties(trt-infer PROPERTIES CUDA_ARCHITECTURES "72") # 假设你的目标架构是Compute Capability 8.6
 
